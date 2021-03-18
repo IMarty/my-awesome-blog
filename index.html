@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My blog</title>
+  </head>
+  <body>
+    <h1>My awesome Blog</h1>
+    <!-- It just works© -->
+    <!-- But what about SEO ? -->
+    <ul>
+      <li></li>
+    </ul>
+    <script>
+      fetch(
+        'https://ghost-fit4coding.herokuapp.com/ghost/api/v3/content/posts/?key=8b18d48fbb660b06dd1df0eaf5'
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((jsonRes) => {
+          console.log(jsonRes);
+          const postsArray = jsonRes.posts;
+          for (const post of postsArray) {
+            const clone = document.querySelector('li').cloneNode(true);
+            document.querySelector('ul').append(clone);
+            clone.innerText = post.title;
+          }
+          document.querySelector('li').remove();
+        });
+    </script>
+  </body>
+</html>
